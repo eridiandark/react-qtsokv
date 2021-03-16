@@ -1,6 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import App from "./App";
+import Calculator from './components/calculator/scripts/calculator';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+    <Calculator onSave={ value => alert('Saved ' + value) }/>,
+    document.getElementById("root")
+);
