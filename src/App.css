@@ -1,0 +1,100 @@
+.Home {
+  padding-left: 20px;
+}
+
+.App > form, .App > div {
+  margin-left: 40px;
+}
+
+.App {
+  text-align: left;
+}
+.App > form {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+nav {
+  background: #b8b8b8;
+  margin-bottom: 40px;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+}
+nav ul li {
+  padding: 5px 10px;
+}
+nav ul li:hover {
+  background: #a5a5a5;
+}
+nav ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.pseudo-table {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.pseudo-table .row {
+  padding: 5px;
+  max-width: 500px;
+  display: flex;
+  justify-content: space-between;
+  background: #f8f8f8;
+}
+.pseudo-table .row:nth-child(odd) {
+  background: #ebfaf5;
+}
+.pseudo-table .row .label {
+  width: 160px;
+  display: inline-block;
+}
+.pseudo-table button {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+.pseudo-table button img {
+  width: 22px;
+}
+
+.App-logo {
+  height: 70px;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  height: 100px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=App.css.map */
