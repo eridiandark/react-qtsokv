@@ -10,7 +10,7 @@ export default function Table(props) {
         <div className="info-table">
             {
                 tableData.map((value, index) =>
-                    <Item key={value} value={value} index={index} onRemove={
+                    <Item showEditForm={props.showEditForm} key={value} value={value} index={index} onRemove={
                         ()=>{
                             let arr = tableData.filter((item, key) => key !== index)
                             setTableData(arr);

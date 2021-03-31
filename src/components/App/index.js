@@ -24,7 +24,7 @@ export default function App(){
             <h1>App</h1>
             <Calculator onSave={addItem}/>
             <Table tableData={tableData} updateData={setTableData} showEditForm={showEditForm}/>
-            <EditForm val={editItemIndex===null?null:tableData[editItemIndex]}/>
+            <EditForm index={editItemIndex} val={editItemIndex===null?null:tableData[editItemIndex]}/>
         </div>
     );
 }
