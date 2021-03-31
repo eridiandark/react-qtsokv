@@ -4,6 +4,9 @@
 }
 .calculator{
   display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+  max-width: 600px;
   >*{
     margin: 0 5px;
     padding: 5px 10px;
@@ -20,13 +23,16 @@
   select{
     @extend %border;
   }
-  .calc_save{
+  .calc-save{
     margin-left: auto;
-    padding: 0 5px;
+    padding: 5px 10px;
     display: flex;
     align-items: center;
     img{
       height: 22px;
     }
+  }
+  .error{
+    color: red;
   }
 }

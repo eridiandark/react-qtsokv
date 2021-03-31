@@ -1,20 +1,21 @@
 import React from "react";
-import DelIcon from "./inc/delete.svg"
+import DelIcon from "./inc/delete.svg";
+import './index.scss';
 
-let data = [1, 2, 3, 4];
-
-export default function Table() {
-    const [tableData, setTableData] = React.useState(data);
-    const addRow = (val) => {
-        tableData.push(val)
-        setTableData(tableData);
-    }
+export default function Table(props) {
+    const [tableData, setTableData] = React.useState(props.tableData);
+    const addRow = val =>
+        setTableData([...tableData, val]);
     return(
         <div className="info-table">
             {
                 tableData.map((value, index) =>
-                    <Item key={value} value={value} onRemove={
-                        ()=>setTableData(tableData.filter((item, key) => key !== index))
+                    <Item key={value} value={value} index={index} onRemove={
+                        ()=>{
+                            let arr = tableData.filter((item, key) => key !== index)
+                            setTableData(arr);
+                            props.updateData(arr);
+                        }
                     }/>)
             }
         </div>
@@ -25,7 +26,8 @@ function Item(props){
     return(
         <>
             <span>{props.value}</span>
-            <button className="row_del" onClick={props.onRemove}>
+            <button onClick={()=>{props.showEditForm(props.index)}}>Edit</button>
+            <button className="row-del" onClick={props.onRemove}>
                 <img width="22" src={DelIcon} alt="Del"/>
             </button>
         </>

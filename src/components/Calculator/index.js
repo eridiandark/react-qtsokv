@@ -3,7 +3,8 @@ import SaveIcon from './inc/floppy-disk.svg';
 import "./index.scss";
 
 export default function Calculator(props){
-    const [answer, setAnswer] = React.useState('');
+    const [answer, setAnswer] = React.useState(null);
+    const [errMess, setErrMess] = React.useState('');
 
     const refX = React.useRef(null);
     const refY = React.useRef(null);
@@ -14,10 +15,12 @@ export default function Calculator(props){
         let y = refY.current.value;
         let operator = refOperator.current.value;
         if(isNaN(+x) || x === '') {
-            setAnswer('x not a number');
+            setErrMess('x not a number');
+            setAnswer(null);
         }
         else if(isNaN(+y) || y === ''){
-            setAnswer('y not a number');
+            setErrMess('y not a number');
+            setAnswer(null);
         }
         else {
             x = parseFloat(x);
@@ -36,30 +39,38 @@ export default function Calculator(props){
                 case "/":
                     if (y !== 0) setAnswer(x / y);
                     else {
-                        setAnswer("error - division by zero");
+                        setErrMess("error - division by zero");
+                        setAnswer(null);
                     }
                     break;
                 default:
-                    setAnswer("error - operator no valid");
+                    setErrMess("error - operator no valid");
+                    setAnswer(null);
             }
         }
     }
     const onSave = () => {
-        props.onSave(answer);
+        if(props.onSave) props.onSave(answer);
     }
+
+    const clearError = () => {
+        setErrMess('');
+    }
+
     return(
         <div className="calculator">
-            <input type="number" ref={refX} placeholder="x"/>
-            <select ref={refOperator}>
+            <input type="number" ref={refX} placeholder="x" onChange={clearError}/>
+            <select ref={refOperator} onChange={clearError}>
                 <option>+</option>
                 <option>-</option>
                 <option>/</option>
                 <option>*</option>
             </select>
-            <input type="number" ref={refY} placeholder="y"/>
+            <input type="number" ref={refY} placeholder="y" onChange={clearError}/>
             <button onClick={pressAnswer}>=</button>
             <span>{answer}</span>
-            <button className="calc_save" onClick={onSave}><img src={SaveIcon} alt="Save"/></button>
+            <span className="error">{errMess}</span>
+            <button disabled={answer===null} className="calc-save" onClick={onSave}><img src={SaveIcon} alt="Save"/></button>
         </div>
     );
 }

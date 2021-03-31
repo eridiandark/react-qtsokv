@@ -1,0 +1,20 @@
+%border{
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.info-table{
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  max-width: 600px;
+  >*{
+    margin: 5px;
+  }
+  span{
+    padding: 10px 0;
+  }
+  button{
+    @extend %border;
+    padding: 5px 10px;
+    background: white;
+  }
+}
