@@ -6,7 +6,7 @@ export default function Table({tableData, delItem, editItem, upItem, downItem}) 
     return(
         <div className="info-table">
             {tableData.map((value, index) => <Item
-                key={value}
+                key={index}
                 val={value}
                 delRow={() => delItem(index)}
                 editVal={(val) => editItem(val, index)}
