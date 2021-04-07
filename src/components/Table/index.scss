@@ -4,17 +4,37 @@
 }
 .info-table{
   display: grid;
-  grid-template-columns: 1fr auto auto;
+  grid-template-columns: auto 1fr auto;
   max-width: 600px;
   >*{
     margin: 5px;
   }
   span{
     padding: 10px 0;
+    &.hide{
+      display: none;
+    }
   }
   button{
     @extend %border;
     padding: 5px 10px;
     background: white;
+  }
+  input{
+    display: none;
+    &.show{
+      display: block;
+    }
+  }
+  .controls{
+    display: flex;
+    flex-direction: column;
+    &>*{
+      padding: 0 5px;
+      cursor: pointer;
+      &:hover{
+        opacity: .5;
+      }
+    }
   }
 }

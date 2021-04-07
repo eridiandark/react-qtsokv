@@ -2,7 +2,7 @@ import React from "react";
 import SaveIcon from './inc/floppy-disk.svg';
 import "./index.scss";
 
-export default function Calculator(props){
+export default function Calculator({onSave}){
     const [answer, setAnswer] = React.useState(null);
     const [errMess, setErrMess] = React.useState('');
 
@@ -49,28 +49,29 @@ export default function Calculator(props){
             }
         }
     }
-    const onSave = () => {
-        if(props.onSave) props.onSave(answer);
-    }
 
     const clearError = () => {
         setErrMess('');
     }
 
     return(
-        <div className="calculator">
-            <input type="number" ref={refX} placeholder="x" onChange={clearError}/>
-            <select ref={refOperator} onChange={clearError}>
-                <option>+</option>
-                <option>-</option>
-                <option>/</option>
-                <option>*</option>
-            </select>
-            <input type="number" ref={refY} placeholder="y" onChange={clearError}/>
-            <button onClick={pressAnswer}>=</button>
-            <span>{answer}</span>
-            <span className="error">{errMess}</span>
-            <button disabled={answer===null} className="calc-save" onClick={onSave}><img src={SaveIcon} alt="Save"/></button>
-        </div>
+        <>
+            <div className="calculator">
+                <input type="number" ref={refX} placeholder="x" onChange={clearError}/>
+                <select ref={refOperator} onChange={clearError}>
+                    <option>+</option>
+                    <option>-</option>
+                    <option>/</option>
+                    <option>*</option>
+                </select>
+                <input type="number" ref={refY} placeholder="y" onChange={clearError}/>
+                <button onClick={pressAnswer}>=</button>
+                <span>{answer}</span>
+                <button disabled={answer===null} className="calc-save" onClick={() => onSave(answer)}><img src={SaveIcon} alt="Save"/></button>
+            </div>
+            <div className={"alert alert-danger fade" + (errMess?" show":"")} role="alert">
+                {errMess}
+            </div>
+        </>
     );
 }

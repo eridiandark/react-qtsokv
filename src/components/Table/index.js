@@ -1,35 +1,18 @@
 import React from "react";
-import DelIcon from "./inc/delete.svg";
 import './index.scss';
+import Item from "../Item";
 
-export default function Table(props) {
-    const [tableData, setTableData] = React.useState(props.tableData);
-    const addRow = val =>
-        setTableData([...tableData, val]);
+export default function Table({tableData, delItem, editItem, upItem, downItem}) {
     return(
         <div className="info-table">
-            {
-                tableData.map((value, index) =>
-                    <Item showEditForm={props.showEditForm} key={value} value={value} index={index} onRemove={
-                        ()=>{
-                            let arr = tableData.filter((item, key) => key !== index)
-                            setTableData(arr);
-                            props.updateData(arr);
-                        }
-                    }/>)
-            }
+            {tableData.map((value, index) => <Item
+                key={value}
+                val={value}
+                delRow={() => delItem(index)}
+                editVal={(val) => editItem(val, index)}
+                upRow={() => upItem(index)}
+                downRow={() => downItem(index)}/>)}
         </div>
     )
 }
 
-function Item(props){
-    return(
-        <>
-            <span>{props.value}</span>
-            <button onClick={()=>{props.showEditForm(props.index)}}>Edit</button>
-            <button className="row-del" onClick={props.onRemove}>
-                <img width="22" src={DelIcon} alt="Del"/>
-            </button>
-        </>
-    )
-}
