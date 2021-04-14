@@ -25,7 +25,7 @@ export default function EditCell({onValid, onSave, val}) {
     }
     const saveVal = () => {
         let newVal = inpRef.current.value;
-        setIV(onValid(newVal));
+        setIV(!onValid(newVal));
         if (isValid) {
             onSave(newVal)
             setEM(false);
@@ -38,7 +38,7 @@ export default function EditCell({onValid, onSave, val}) {
             <input
                 type="text"
                 ref={inpRef}
-                className={"form-control" + (isValid ? "" : "is-invalid")}
+                className={"form-control" + (isValid ? "" : " is-invalid")}
                 onKeyUp={keyPress}
                 onBlur={() => saveVal(inpRef.current.value)}/>
         </div>

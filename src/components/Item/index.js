@@ -81,7 +81,7 @@ export default function Item({index}) {
                 }}/>
             <EditCell
                 val={tableData[index].val}
-                onValid={val => (isNaN(+val) && val !== '')}
+                onValid={val => (isNaN(+val) || val !== '')}
                 onSave={val => {
                     let arr = JSON.parse(JSON.stringify(tableData));
                     arr[index].val = val;
