@@ -10,14 +10,14 @@ const data = [
     {id: 4, name: 'val4', val: 4}
 ];
 
-export default function App(){
+export default function App() {
     const [tableData, setTableData] = React.useState(data);
-    return(
+    return (
         <div className="page">
             <h1>App</h1>
             <TableDataContext.Provider value={[tableData, setTableData]}>
-                <Calculator />
-                <Table />
+                <Calculator/>
+                <Table/>
             </TableDataContext.Provider>
         </div>
     );

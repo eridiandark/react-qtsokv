@@ -1,5 +1,6 @@
 import React from "react";
-export default function EditCell({onValid, onSave, val}){
+
+export default function EditCell({onValid, onSave, val}) {
     const [editMode, setEM] = React.useState(false);
     const [isValid, setIV] = React.useState(true);
     const inpRef = React.useRef(val);
@@ -7,10 +8,12 @@ export default function EditCell({onValid, onSave, val}){
     const doubleClick = () => {
         setEM(true);
         inpRef.current.value = val;
-        setTimeout(()=>{inpRef.current.focus();}, 100);
+        setTimeout(() => {
+            inpRef.current.focus();
+        }, 100);
     }
     const keyPress = e => {
-        switch (e.key){
+        switch (e.key) {
             case 'Enter':
                 saveVal(inpRef.current.value);
                 break;
@@ -23,21 +26,21 @@ export default function EditCell({onValid, onSave, val}){
     const saveVal = () => {
         let newVal = inpRef.current.value;
         setIV(onValid(newVal));
-        if(isValid){
+        if (isValid) {
             onSave(newVal)
             setEM(false);
         }
     }
 
-    return(
-        <div className={"edit-item" + (editMode?" edit":"")}>
+    return (
+        <div className={"edit-item" + (editMode ? " edit" : "")}>
             <span onDoubleClick={doubleClick}>{val}</span>
             <input
                 type="text"
                 ref={inpRef}
-                className={"form-control" + (isValid?"":"is-invalid")}
+                className={"form-control" + (isValid ? "" : "is-invalid")}
                 onKeyUp={keyPress}
-                onBlur={()=>saveVal(inpRef.current.value)}/>
+                onBlur={() => saveVal(inpRef.current.value)}/>
         </div>
     )
 }

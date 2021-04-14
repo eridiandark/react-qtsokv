@@ -5,7 +5,7 @@ import {TableDataContext} from "../App/context";
 
 export default function Table() {
     const [tableData, setTableData] = useContext(TableDataContext)
-    return(
+    return (
         <div className="info-table">
             {tableData.map((value, index) => <Item
                 key={index}

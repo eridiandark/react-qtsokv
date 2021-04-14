@@ -1,49 +1,60 @@
-%border{
+%border {
   border: 1px solid lightgray;
   border-radius: 5px;
 }
-input{
+
+input {
   @extend %border;
   padding: 5px 10px;
 }
-label{
+
+label {
   margin-left: 5px;
   margin-right: 20px;
 }
-.calculator{
+
+.calculator {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
-  >*{
+
+  > * {
     margin: 0 5px;
     padding: 5px 10px;
   }
-  input{
+
+  input {
     max-width: 100px;
     text-align: center;
     box-sizing: border-box;
     @extend %border;
   }
-  button{
+
+  button {
     @extend %border;
   }
-  select{
+
+  select {
     @extend %border;
   }
-  .calc-save{
-    &:disabled{
+
+  .calc-save {
+    &:disabled {
       opacity: .5;
     }
+
     margin-left: auto;
     margin-right: 0;
     padding: 5px 10px;
     display: flex;
     align-items: center;
-    img{
+
+    img {
       height: 22px;
     }
   }
-  .error{
+
+  .error {
     color: red;
   }
 }

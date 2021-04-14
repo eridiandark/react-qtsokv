@@ -3,7 +3,7 @@ import DelIcon from "../Table/inc/delete.svg";
 import {TableDataContext} from "../App/context";
 import EditCell from "../EditCell";
 
-export default function Item({index}){
+export default function Item({index}) {
     const [editModeVal, setEMV] = React.useState(false);
     const [editModeName, setEMN] = React.useState(false);
     const [isValidVal, setIVV] = React.useState(true);
@@ -20,10 +20,10 @@ export default function Item({index}){
         setTableData(arr);
     }
     const moveItem = (direction = 'up') => {
-        if(tableData.length>1){
+        if (tableData.length > 1) {
             let arr = tableData.slice();
             let tmp;
-            switch (direction){
+            switch (direction) {
                 case "up":
                     tmp = index === 0 ? tableData.length - 1 : index - 1
                     break;
@@ -40,35 +40,32 @@ export default function Item({index}){
     }
     const saveVal = () => {
         let newVal = inpValue.current.value;
-        if(isNaN(+newVal) || newVal === ''){
+        if (isNaN(+newVal) || newVal === '') {
             setIV(false);
-        }
-        else {
+        } else {
             editItem(Number(newVal), index)
             setEM(false);
         }
     }
     const getControl = () => {
         let res = "";
-        if(index>0 && index < tableData.length - 1){
+        if (index > 0 && index < tableData.length - 1) {
             res = <div className={"controls"}>
-                <span className={"btn-top"} onClick={()=>moveItem("up")}>&#9650;</span>
-                <span className={"btn-bottom"} onClick={()=>moveItem("down")}>&#9660;</span>
+                <span className={"btn-top"} onClick={() => moveItem("up")}>&#9650;</span>
+                <span className={"btn-bottom"} onClick={() => moveItem("down")}>&#9660;</span>
             </div>
-        }
-        else if(index===0){
+        } else if (index === 0) {
             res = <div className={"controls first-row"}>
-                <span className={"btn-bottom"} onClick={()=>moveItem("down")}>&#9660;</span>
+                <span className={"btn-bottom"} onClick={() => moveItem("down")}>&#9660;</span>
             </div>
-        }
-        else if(index === tableData.length - 1){
+        } else if (index === tableData.length - 1) {
             res = <div className={"controls last-row"}>
-                <span className={"btn-top"} onClick={()=>moveItem("up")}>&#9650;</span>
+                <span className={"btn-top"} onClick={() => moveItem("up")}>&#9650;</span>
             </div>
         }
         return res;
     }
-    return(
+    return (
         <>
             {getControl()}
             <div className={"item"}>
@@ -76,16 +73,16 @@ export default function Item({index}){
             </div>
             <EditCell
                 val={tableData[index].name}
-                onValid={val=>true}
-                onSave={val=>{
+                onValid={val => true}
+                onSave={val => {
                     let arr = JSON.parse(JSON.stringify(tableData));
                     arr[index].name = val;
                     setTableData(arr);
                 }}/>
             <EditCell
                 val={tableData[index].val}
-                onValid={val=>(isNaN(+val) && val!=='')}
-                onSave={val=>{
+                onValid={val => (isNaN(+val) && val !== '')}
+                onSave={val => {
                     let arr = JSON.parse(JSON.stringify(tableData));
                     arr[index].val = val;
                     setTableData(arr);
