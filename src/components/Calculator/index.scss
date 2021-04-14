@@ -2,6 +2,14 @@
   border: 1px solid lightgray;
   border-radius: 5px;
 }
+input{
+  @extend %border;
+  padding: 5px 10px;
+}
+label{
+  margin-left: 5px;
+  margin-right: 20px;
+}
 .calculator{
   display: flex;
   align-items: center;
