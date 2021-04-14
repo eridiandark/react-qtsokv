@@ -1,14 +1,18 @@
 import React from "react";
 import SaveIcon from './inc/floppy-disk.svg';
 import "./index.scss";
+import {TableDataContext} from "../App/context";
 
-export default function Calculator({onSave}){
+export default function Calculator(){
     const [answer, setAnswer] = React.useState(null);
     const [errMess, setErrMess] = React.useState('');
+    const [tableData, setTableData] = React.useContext(TableDataContext)
 
+    const refName = React.useRef("");
     const refX = React.useRef(null);
     const refY = React.useRef(null);
     const refOperator = React.useRef(null);
+
 
     const pressAnswer = () => {
         let x = refX.current.value;
@@ -56,7 +60,9 @@ export default function Calculator({onSave}){
 
     return(
         <>
-            <div className="calculator">
+            <label>Name</label>
+            <input type="text" ref={refName} className={"form-control"}/>
+            <div className="calculator" >
                 <input type="number" ref={refX} placeholder="x" onChange={clearError}/>
                 <select ref={refOperator} onChange={clearError}>
                     <option>+</option>
@@ -67,7 +73,11 @@ export default function Calculator({onSave}){
                 <input type="number" ref={refY} placeholder="y" onChange={clearError}/>
                 <button onClick={pressAnswer}>=</button>
                 <span>{answer}</span>
-                <button disabled={answer===null} className="calc-save" onClick={() => onSave(answer)}><img src={SaveIcon} alt="Save"/></button>
+                <button disabled={answer===null} className="calc-save" onClick={() => {
+                    let arr = JSON.parse(JSON.stringify(tableData));
+                    arr.push({id: tableData[tableData.length-1].id+1, name: refName.current.value, val: answer})
+                    setTableData(arr);
+                }}><img src={SaveIcon} alt="Save"/></button>
             </div>
             <div className={"alert alert-danger fade" + (errMess?" show":"")} role="alert">
                 {errMess}
