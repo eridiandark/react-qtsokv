@@ -1,7 +1,7 @@
 import React from "react";
 import SaveIcon from './inc/floppy-disk.svg';
 import "./index.scss";
-import {TableDataContext} from "../App/context";
+import {TableDataContext} from "../App";
 
 export default function Calculator() {
     const [answer, setAnswer] = React.useState(null);
@@ -61,15 +61,15 @@ export default function Calculator() {
             <label>Name</label>
             <input type="text" ref={refName} className={"form-control"}/>
             <div className="calculator">
-                <input type="number" ref={refX} placeholder="x" onChange={clearError}/>
-                <select ref={refOperator} onChange={clearError}>
+                <input type="number" ref={refX} placeholder="x" onChange={()=>{clearError(); pressAnswer();}}/>
+                <select ref={refOperator} onChange={()=>{clearError(); pressAnswer();}}>
                     <option>+</option>
                     <option>-</option>
                     <option>/</option>
                     <option>*</option>
                 </select>
-                <input type="number" ref={refY} placeholder="y" onChange={clearError}/>
-                <button onClick={pressAnswer}>=</button>
+                <input type="number" ref={refY} placeholder="y" onChange={()=>{clearError(); pressAnswer();}}/>
+                <span>=</span>
                 <span>{answer}</span>
                 <button disabled={answer === null} className="calc-save" onClick={() => {
                     let arr = JSON.parse(JSON.stringify(tableData));

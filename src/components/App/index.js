@@ -1,7 +1,8 @@
 import React from "react";
 import Calculator from "../Calculator";
 import Table from "../Table";
-import {TableDataContext} from "./context";
+
+export const TableDataContext = React.createContext();
 
 const data = [
     {id: 1, name: 'val1', val: 1},

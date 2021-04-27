@@ -3,8 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "immutability-helper": "^3.1.1",
     "node-sass": "^5.0.0",
     "react": "^17.0.0",
+    "react-dnd": "^14.0.2",
+    "react-dnd-html5-backend": "^14.0.0",
     "react-dom": "^17.0.0",
     "react-router-dom": "^5.2.0"
   },
