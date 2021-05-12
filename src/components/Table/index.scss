@@ -70,20 +70,26 @@
   }
   .row{
     border: 1px dashed gray;
+    display: flex;
   }
   .col1{
     width: 24px;
+    box-sizing: border-box;
   }
   .col2{
     width: 40px;
+    box-sizing: border-box;
   }
   .col3{
     width: calc(50% - 57px);
+    box-sizing: border-box;
   }
   .col4{
     width: calc(50% - 57px);
+    box-sizing: border-box;
   }
   .col5{
     width: 50px;
+    box-sizing: border-box;
   }
 }

@@ -1,12 +1,13 @@
 import React from "react";
 import SaveIcon from './inc/floppy-disk.svg';
 import "./index.scss";
-import {TableDataContext} from "../App";
+import actions from "../../action";
+import {connect} from "react-redux";
 
-export default function Calculator() {
+
+export function Calculator(props) {
     const [answer, setAnswer] = React.useState(null);
     const [errMess, setErrMess] = React.useState('');
-    const [tableData, setTableData] = React.useContext(TableDataContext)
 
     const refName = React.useRef("");
     const refX = React.useRef(null);
@@ -72,9 +73,8 @@ export default function Calculator() {
                 <span>=</span>
                 <span>{answer}</span>
                 <button disabled={answer === null} className="calc-save" onClick={() => {
-                    let arr = JSON.parse(JSON.stringify(tableData));
-                    arr.push({id: tableData[tableData.length - 1].id + 1, name: refName.current.value, val: answer})
-                    setTableData(arr);
+                    console.log("hello");
+                    props.addItem({id: 0, name: refName.current.value, val: answer})
                 }}><img src={SaveIcon} alt="Save"/></button>
             </div>
             <div className={"alert alert-danger fade" + (errMess ? " show" : "")} role="alert">
@@ -83,3 +83,12 @@ export default function Calculator() {
         </>
     );
 }
+
+function mapStateToProps(state) {
+    console.log(state);
+    return {
+        tableData: state.data
+    };
+}
+
+export default connect(null, actions)(Calculator)

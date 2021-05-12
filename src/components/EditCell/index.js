@@ -1,4 +1,8 @@
 import React from "react";
+import {editItem} from "../../action";
+import configureStore from "../../store";
+
+const store = configureStore();
 
 export default function EditCell({onValid, onSave, val, type, className}) {
     const [editMode, setEM] = React.useState(false);
