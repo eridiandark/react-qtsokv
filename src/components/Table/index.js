@@ -1,12 +1,12 @@
-import React, {useContext} from "react";
+import React from "react";
 import './index.scss';
 import Item from "../Item";
 import {connect} from "react-redux";
 import actions from "../../action";
 
-export function Table(props) {
+export function Table({tableData, loadTableData}) {
+    loadTableData();
     return (
-
             <div className="info-table">
                 <div className={"row"}>
                     <span className={"table-head col1"}></span>
@@ -15,11 +15,23 @@ export function Table(props) {
                     <span className={"table-head col4"}>VALUE</span>
                     <span className={"table-head col5"}></span>
                 </div>
-                {props.tableData.map((value, index) => <Item
-                    key={index}
-                    index={index}
-                    id={value.id}
-                />)}
+                {tableData.map((value, index) => {
+                    let type = 'center';
+                    if(tableData.length === 1){
+                        type = 'one';
+                    }
+                    else if(index === 0){
+                        type = 'first';
+                    }
+                    else if(index + 1 === tableData.length){
+                        type = 'last';
+                    }
+                    return(<Item
+                        key={index}
+                        data={value}
+                        type={type}
+                    />)
+                })}
             </div>
 
     )
@@ -27,7 +39,7 @@ export function Table(props) {
 
 function mapStateToProps(state) {
     return {
-        tableData: state.data
+        tableData: state.tableReducer.data
     };
 }
 

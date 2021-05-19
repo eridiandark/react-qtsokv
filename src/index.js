@@ -2,11 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.scss';
 import App from "./components/App";
-import {createStore} from 'redux';
 import { Provider } from 'react-redux';
-import tableReducer from "./reducers/tableReducer";
-
-let store = createStore(tableReducer);
+import store from "./store";
 
 ReactDOM.render(
     <Provider store={store}>

@@ -84,11 +84,4 @@ export function Calculator(props) {
     );
 }
 
-function mapStateToProps(state) {
-    console.log(state);
-    return {
-        tableData: state.data
-    };
-}
-
 export default connect(null, actions)(Calculator)

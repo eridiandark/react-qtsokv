@@ -30,6 +30,30 @@ export default function tableReducer(state = initialState.table, action) {
                 data: data
             }
         }
+        case "MOVE_ITEM": {
+            let data = JSON.parse(JSON.stringify(state.data));
+            let a = data.findIndex(value => value.id === action.meta.id);
+            let b;
+            if(action.meta.type === 'up'){
+                b = a - 1;
+            }
+            else {
+                b = a + 1;
+            }
+            if(a > -1){
+                [data[a], data[b]] = [data[b], data[a]]
+            }
+            return {
+                ...state,
+                data: data
+            }
+        }
+        case 'LOAD_TABLE_DATA' :
+            console.log(action.data);
+            return {
+                ...state,
+                data : action.data
+            }
 
         default:
             return state;
