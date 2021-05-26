@@ -5,33 +5,23 @@ export default function tableReducer(state = initialState.table, action) {
     switch(action.type) {
 
         case "ADD_ITEM": {
-            let id=0;
-            for (let i=0; i<state.data.length; ++i){
-                if(state.data[i].id >= id) id = (state.data[i].id + 1);
-            }
-            let item = action.meta;
-            item.id = id;
-            let data = [...state.data, item]
+            let data = [...state.data, action.meta]
             return {
                 ...state,
-                data: data
+                data
             }
         }
         case "EDIT_ITEM": {
-            let data = JSON.parse(JSON.stringify(state.data));
-            for (let i=0; i<data.length; ++i){
-                if(data[i].id === action.meta.id){
-                    data[i] = action.meta;
-                    break;
-                }
-            }
+            let data = [...state.data];
+            let i = data.findIndex(value => value.id === action.meta.id);
+            data[i] = action.meta;
             return {
                 ...state,
-                data: data
+                data
             }
         }
         case "MOVE_ITEM": {
-            let data = JSON.parse(JSON.stringify(state.data));
+            let data = [...state.data];
             let a = data.findIndex(value => value.id === action.meta.id);
             let b;
             if(action.meta.type === 'up'){
@@ -45,16 +35,20 @@ export default function tableReducer(state = initialState.table, action) {
             }
             return {
                 ...state,
-                data: data
+                data
             }
         }
+        case 'DEL_ITEM':
+            return {
+                ...state,
+                data : state.data.filter(item=>item.id !== action.meta)
+            }
+
         case 'LOAD_TABLE_DATA' :
-            console.log(action.data);
             return {
                 ...state,
                 data : action.data
             }
-
         default:
             return state;
     }

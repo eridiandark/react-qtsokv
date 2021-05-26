@@ -32,6 +32,11 @@
     input {
       display: none;
       height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      &.is-invalid{
+        border: red 1px solid;
+      }
     }
   }
 

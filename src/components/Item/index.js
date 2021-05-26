@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import actions from "../../action";
 import EditCell from "../EditCell";
 
-function Item({data, type, moveItem, editItem}) {
+function Item({data, type, moveItem, editItem, delItem}) {
     const rowRef = React.useRef();
 
     const getControl = () => {
@@ -65,7 +65,7 @@ function Item({data, type, moveItem, editItem}) {
                 type={"number"}
                 onValid={val => !(isNaN(+val) || val === '')}
                 onSave={val => editItem({id: data.id, name: data.name, val: val})}/>
-            <button className="row-del col5">
+            <button className="row-del col5" onClick={() => delItem(data.id)}>
                 <img width="22" src={DelIcon} alt="Del"/>
             </button>
         </div>
@@ -73,24 +73,3 @@ function Item({data, type, moveItem, editItem}) {
 }
 
 export default connect(null, actions)(Item)
-
-/*<EditCell
-                className={"col3"}
-                val={tableData[index].name}
-                type={"text"}
-                onValid={val => true}
-                onSave={val => {
-                    let arr = JSON.parse(JSON.stringify(tableData));
-                    arr[index].name = val;
-                    setTableData(arr);
-                }}/>
-            <EditCell
-                className={"col4"}
-                val={tableData[index].val}
-                type={"number"}
-                onValid={val => !(isNaN(+val) || val === '')}
-                onSave={val => {
-                    let arr = JSON.parse(JSON.stringify(tableData));
-                    arr[index].val = val;
-                    setTableData(arr);
-                }}/>*/

@@ -1,11 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import './index.scss';
 import Item from "../Item";
 import {connect} from "react-redux";
 import actions from "../../action";
+import {getTableData} from "../../selectors";
 
 export function Table({tableData, loadTableData}) {
-    loadTableData();
+    useEffect(()=>loadTableData(), [loadTableData])
     return (
             <div className="info-table">
                 <div className={"row"}>
@@ -33,13 +34,12 @@ export function Table({tableData, loadTableData}) {
                     />)
                 })}
             </div>
-
     )
 }
 
 function mapStateToProps(state) {
     return {
-        tableData: state.tableReducer.data
+        tableData: getTableData(state)
     };
 }
 
